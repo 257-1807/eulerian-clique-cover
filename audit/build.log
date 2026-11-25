@@ -1,0 +1,25 @@
+$ lean --version
+Lean (version 4.36.0, arm64-apple-darwin24.6.0, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)
+exit status: 0
+
+$ lake --version
+Lake version 5.0.0-src+611c117 (Lean version 4.36.0)
+exit status: 0
+
+$ git -C .lake/packages/mathlib rev-parse HEAD
+fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+exit status: 0
+
+$ lake --wfail build
+ℹ [6420/6422] Built CliqueCover (1.9s)
+info: CliqueCover.lean:137:0: 'CliqueCover.refute_5065dd93' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CliqueCover.lean:138:0: 'CliqueCover.unbounded_at_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (6422 jobs).
+exit status: 0
+
+$ lake build
+ℹ [6420/6422] Replayed CliqueCover
+info: CliqueCover.lean:137:0: 'CliqueCover.refute_5065dd93' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CliqueCover.lean:138:0: 'CliqueCover.unbounded_at_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (6422 jobs).
+exit status: 0

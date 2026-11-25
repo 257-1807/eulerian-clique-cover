@@ -1,0 +1,24 @@
+{
+  "id": "5065dd93",
+  "statement": "((nontrivial) ∧ (eulerian)) ⇒ vertex_clique_cover_number ≤ (triameter + 4)",
+  "status": "proposed",
+  "generation_method": "cegis-graffiti3",
+  "score": 6.0,
+  "tightness_witnesses": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "lean_statement": null,
+  "lean_proof": null,
+  "metadata": {
+    "novel": true,
+    "touches": 6,
+    "fixed_point": false,
+    "known_as": null,
+    "complexity": 1
+  }
+}

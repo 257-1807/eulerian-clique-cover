@@ -1,0 +1,12 @@
+K(2,2): Eulerian=True, triameter=4, clique cover=2, bound holds=True
+K(2,4): Eulerian=True, triameter=6, clique cover=4, bound holds=True
+K(2,6): Eulerian=True, triameter=6, clique cover=6, bound holds=True
+K(2,8): Eulerian=True, triameter=6, clique cover=8, bound holds=True
+K(2,10): Eulerian=True, triameter=6, clique cover=10, bound holds=True
+K(2,12): Eulerian=True, triameter=6, clique cover=12, bound holds=False
+K(2,14): Eulerian=True, triameter=6, clique cover=14, bound holds=False
+K(2,16): Eulerian=True, triameter=6, clique cover=16, bound holds=False
+K(2,18): Eulerian=True, triameter=6, clique cover=18, bound holds=False
+K(2,20): Eulerian=True, triameter=6, clique cover=20, bound holds=False
+K(2,22): Eulerian=True, triameter=6, clique cover=22, bound holds=False
+K(2,24): Eulerian=True, triameter=6, clique cover=24, bound holds=False

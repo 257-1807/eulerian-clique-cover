@@ -1,0 +1,3 @@
+$ lake env leanchecker --verbose CliqueCover
+replaying CliqueCover
+exit status: 0

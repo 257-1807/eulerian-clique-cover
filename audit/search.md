@@ -1,0 +1,16 @@
+# 检索记录，2026-11-25
+
+目标是 Pastorek 的 AutoGraphForge 原始命题 `5065dd93`，审计排名 2441。检索同时采用原式、ID 及普通数学术语，以便找到没有沿用候选编号的结果。
+
+| 渠道 | 检索词、核查方法及结果 |
+|---|---|
+| 作者档案 | 在固定提交中核实了原始行、排名以及三份已反驳档案的 1,413、150、0 条记录。后面三份中均无本题的 ID 或原判词。金标准文件的 58 条记录也未命中。作者仓库全部开放或关闭的议题只有 #1，处理完全图的色数与平均度。 [原始行](source.json) · [作者已反驳的主档](https://github.com/JanPastorek/AutoGraphForge/blob/4d1a8afc99447cacd2328cca20e47b6493e8dbc5/results/cegis_refuted.json) · [上游议题 #1](https://github.com/JanPastorek/AutoGraphForge/issues/1) |
+| arXiv | 以 `all:"5065dd93"`、`all:"triameter" AND all:"clique cover"` 搜索均为零条；`all:"AutoGraphForge"` 找到原论文。直接检查 Das 的三直径论文及 Borowiecki–Hak 关于距离填充的后续论文，两篇的全文检索均未出现 `clique cover`。 [arXiv 检索](https://export.arxiv.org/api/query?search_query=all%3A%225065dd93%22) · [Das](https://arxiv.org/abs/1804.01088) · [Borowiecki–Hak](https://arxiv.org/abs/2611.17259) |
+| Google Scholar | 桌面浏览器检索 `"triameter" "clique cover"` 读到 3 项，分别是 Pastorek 原文及同一词典的英、俄文题名。直接 HTTP 客户端另查 `"5065dd93" "triameter"`、`"triameter" "clique cover" "Eulerian"`，只收到客户端验证页面，未将其作为阴性结果。 [Scholar 检索](https://scholar.google.com/scholar?q=%22triameter%22+%22clique+cover%22) |
+| 论文与数据索引 | OpenAlex、DataCite、Figshare 以 `5065dd93` 查找，均无项目。OpenAlex 对 `triameter clique cover` 返回原论文和 Borowiecki–Hak。DataCite 与 Figshare 同词零条。OpenAlex 的 `AutoGraphForge` 检索找到 5 项，包括别的候选上关于燃烧、罗马支配或双罗马支配的研究；逐项核题。直接访问 Zenodo 搜索 API 返回 HTTP 403，已在 DataCite 与 OpenAlex 中检查可发现的 Zenodo DOI。 [OpenAlex](https://api.openalex.org/works?search=AutoGraphForge) · [DataCite](https://api.datacite.org/dois?query=AutoGraphForge) · [Figshare](https://figshare.com/search?q=AutoGraphForge) |
+| 前向引用 | OpenAlex 原论文对象 W7208712928 的 `cited_by_count` 为零，按引用者过滤也为空。Semantic Scholar 的引用列表为空。专题关键词仍能找到直接提及该语料的其他结果，说明这两份引用列表覆盖有限。 [OpenAlex 引用者](https://api.openalex.org/works?filter=cites:W7208712928) · [Semantic Scholar 引用者](https://api.semanticscholar.org/graph/v1/paper/arXiv:2609.03478/citations?fields=title%2Cyear) |
+| GitHub 代码与议题 | 全站默认分支代码检索 `"5065dd93" "triameter"`、`"vertex_clique_cover_number ≤ (triameter + 4)"`、`"vertexCliqueCoverNumber" "triameter"` 均为零。以 `"triameter" "Eulerian" "clique cover"` 查询命中三份术语列表。议题关键词 `"5065dd93" "triameter"` 和 `"triameter" "clique cover" "Eulerian"` 皆零。查 `AutoGraphForge` 找到 AXIOM 的评测项目，另行逐文件搜索其固定提交内 `research/autographforge` 的 12 个文件，没有此 ID，也无三直径与团覆盖同时出现的文件。 [GitHub 代码检索](https://github.com/search?q=%225065dd93%22+%22triameter%22&type=code) · [AXIOM 评测档](https://github.com/SaridakisStamatisChristos/Axiom/tree/27767d52dd9b252e0b67de5577ebbb6304523a6c/research/autographforge) |
+| MathOverflow | Stack Exchange API 限定 `site=mathoverflow`，查询 `5065dd93` 与 `triameter`、`triameter` 与 `clique cover`、`AutoGraphForge` 等组合均无命中。 [MathOverflow 检索](https://mathoverflow.net/search?q=triameter+%22clique+cover%22) |
+| Lean Zulip 与 Mathlib | 对所有 web-public 频道分别搜索 `5065dd93`、`triameter clique cover` 与 `AutoGraphForge`，均返回零条，历史搜索标识 `found_oldest=true`、`history_limited=false`。本地 Mathlib v4.36.0 全库搜索 `5065dd93`、`vertexCliqueCoverNumber`、`triameter` 均零；授权的 GitHub 连接器也分别在 Mathlib 默认分支查了后两项。 [Zulip 检索](https://leanprover.zulipchat.com/#narrow/channels/web-public/search/5065dd93) · [固定 Mathlib](https://github.com/leanprover-community/mathlib4/tree/fc4f59e577feb1a4956671bc04ac18aaaf8cd842) |
+
+原始候选是一个经验公式。完全二部图的距离、团划分和度数都是初等性质。这里核查的是已有工作是否已经明确解决了该公式，以及是否已有公开形式化解答。以上检索截至列明日期，在已查资料中未见该项证明或反例。
