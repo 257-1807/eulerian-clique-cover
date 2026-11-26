@@ -2,6 +2,8 @@
 
 AutoGraphForge 候选 `5065dd93` 断言，非平凡欧拉图的顶点团覆盖数至多是三直径加四。完全二部图 $K_{2,12}$ 有 14 个顶点，顶点团覆盖数是 12，三直径是 6。猜想在这张图上会给出 $12\le10$，因而被推翻。Lean 还验证了整个完全二部图族，说明任何只依赖三直径的有限上界都会失败。[Lean 证明](CliqueCover.lean)
 
+[证明](#证明) · [Lean 主文件](CliqueCover.lean) · [查重与先例](audit/search.md)
+
 ## 问题出处
 
 Ján Pastorek 的 *AutoGraphForge: Towards Automated Graph Theory Discovery*（2026，arXiv:2609.03478v1）在 §4.2 报告候选及检验结果。本题印在论文配套仓库的候选档案中，ID 为 `5065dd93`。在固定提交 `4d1a8afc99447cacd2328cca20e47b6493e8dbc5` 的规范化审计表里，其总排名为 2441。原始记录的 `status` 为 `proposed`，`lean_statement` 与 `lean_proof` 都为 `null`。[论文](https://arxiv.org/abs/2609.03478v1) · [作者原始档案](https://github.com/JanPastorek/AutoGraphForge/blob/4d1a8afc99447cacd2328cca20e47b6493e8dbc5/results/cegis_results.json) · [固定版本的排名](https://github.com/JanPastorek/AutoGraphForge/blob/4d1a8afc99447cacd2328cca20e47b6493e8dbc5/results/audit_top_normalised.json)
@@ -14,6 +16,8 @@ Ján Pastorek 的 *AutoGraphForge: Towards Automated Graph Theory Discovery*（2
 
 ## 证明
 
+让同一侧的独立顶点越来越多，每个团仍然最多覆盖其中一个。与此同时，任意两点相距至多 2，当独立侧有至少三个顶点时，可以找到三对距离都等于 2 的三点。于是团覆盖数继续增长，三直径停在 6。
+
 顶点团覆盖数 $\theta(G)$ 是将顶点划分成若干团所需的最小团数。三直径 $\operatorname{tr}(G)$ 是对三个不同顶点 $x,y,z$，取三个两两距离之和的最大值。GraphCalc 的实现枚举不同顶点三元组，少于三个顶点时返回零。[GraphCalc 的实现和定义](https://graphcalc.readthedocs.io/en/stable/_modules/graphcalc/graphs/invariants/classics.html) · [Das 对三直径的研究](https://arxiv.org/abs/1804.01088)
 
 令 $G_n=K_{2,n}$，两侧分别为 $\{a_1,a_2\}$ 和 $\{b_1,\ldots,b_n\}$。每个 $a_i$ 与每个 $b_j$ 相邻，同侧两点之间没有边。
@@ -21,6 +25,8 @@ Ján Pastorek 的 *AutoGraphForge: Towards Automated Graph Theory Discovery*（2
 1. **欧拉性。** 当 $n>0$ 时图连通。两个 $a_i$ 的度都是 $n$，每个 $b_j$ 的度都是 2。因此每个正偶数 $n$ 都给出连通且各顶点度为偶数的图。
 2. **团覆盖数。** 每个团最多包含一个 $b_j$，所以任何划分至少要用 $n$ 个团。若 $n\ge2$，以 $\{a_1,b_1\}$、$\{a_2,b_2\}$ 为两个团，其余 $b_j$ 各自组成单点团，正好用了 $n$ 个。故 $\theta(G_n)=n$。
 3. **三直径。** 异侧两点距离为 1，同侧不同两点可经过另一侧的一个点，距离为 2。每个三元组的距离和都至多为 6。若 $n\ge3$，任取三个不同的 $b_j$，它们的三对距离都是 2，故 $\operatorname{tr}(G_n)=6$。
+
+补图提供了另一种核对方式。$\overline{K_{2,n}}$ 是互不相交的 $K_2$ 和 $K_n$，其色数是 $\max(2,n)$，与上面的团覆盖数一致。
 
 取 $n=12$ 即得反例。当 $n=10$ 时等号成立。对任意自然数 $C$，取 $n=2(C+2)$，便得到同样是三直径 6、但顶点团覆盖数严格大于 $C$ 的欧拉图。正偶数 $n=2$ 是三直径公式的边界例子，此时图为四边形，三直径是 4。
 
@@ -49,7 +55,6 @@ Ján Pastorek 的 *AutoGraphForge: Towards Automated Graph Theory Discovery*（2
 ```sh
 lake exe cache get Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex Mathlib.Combinatorics.SimpleGraph.Metric Mathlib.Tactic
 lake --wfail build
-lake build
 lake env lean -DwarningAsError=true CliqueCover.lean
 lake env leanchecker --verbose CliqueCover
 python3 scripts/check.py
